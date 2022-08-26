@@ -1,4 +1,4 @@
-{{ if os.FileExists "assets/js/app.js" -}}
+{{ if os.FileExists "./node_modules/@hyas/themes-starter-bootstrap/assets/js/app.js" -}}
   {{ partial "footer/esbuild" (dict "src" "js/app.js" "targetPath" "main.js" "load" "async" "transpile" false) -}}
 {{ else -}}
   {{ partial "footer/esbuild" (dict "src" "js/core.js" "targetPath" "main.js" "load" "async" "transpile" false) -}}
