@@ -1,0 +1,22 @@
+{
+  "name": "@hyas/core",
+  "description": "Hyas core",
+  "version": "0.1.0",
+  "browserslist": [
+    "defaults"
+  ],
+  "repository": "https://github.com/h-enk/hyas-core",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean:install": "shx rm -rf package-lock.json node_modules",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "version": "auto-changelog -p && git add CHANGELOG.md"
+  },
+  "devDependencies": {
+    "auto-changelog": "^2.4.0",
+    "shx": "^0.3.4"
+  }
+}
