@@ -79,3 +79,7 @@ copyRight = "Copyright (c) 2020-2021 Henk Verlinde"
 ## Usage
 
 See the Hyas docs: [Quick Start](https://gethyas.com/docs/prologue/quick-start/)
+
+## Credits
+
+Minimal files setup is based on [Really getting started with Hugo](https://www.brycewray.com/posts/2022/07/really-getting-started-hugo/).
