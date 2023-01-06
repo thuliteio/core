@@ -4,7 +4,9 @@ Core templates for Hyas sites.
 
 ## Status
 
-[![npm (scoped)](https://img.shields.io/npm/v/@hyas/core?style=flat-square)](https://www.npmjs.com/package/@hyas/core) [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/h-enk/hyas-core/CodeQL?style=flat-square)]((https://github.com/h-enk/hyas-core/actions/workflows/codeql.yml))
+[![npm (scoped)](https://img.shields.io/npm/v/@hyas/core?style=flat-square)](https://www.npmjs.com/package/@hyas/core) [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/h-enk/hyas-core/codeql.yml?style=flat-square)](https://github.com/h-enk/hyas-core/actions/workflows/codeql.yml)
+
+
 
 ## Installation
 
