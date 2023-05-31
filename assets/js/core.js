@@ -7,4 +7,12 @@ import { listen } from 'quicklink/dist/quicklink.mjs';
 listen();
 
 // lazy sizes for image loading
-import 'lazysizes';
+import lazySizes from 'lazysizes';
+import 'lazysizes/plugins/native-loading/ls.native-loading';
+
+lazySizes.cfg.nativeLoading = {
+  setLoadingAttribute: true, // adds loading="lazy" to match non-native behavior
+  disableListeners: {
+    scroll: true // speeds up browser by not listening to scroll if native lazy load support detected
+  },
+};
