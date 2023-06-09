@@ -1,20 +1,20 @@
 # Hyas core
 
-Core templates for Hyas sites.
+Official core integration for Hyas.
 
 ## Status
 
-[![npm (scoped)](https://img.shields.io/npm/v/@hyas/core?style=flat-square)](https://www.npmjs.com/package/@hyas/core) [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/h-enk/hyas-core/codeql.yml?style=flat-square)](https://github.com/h-enk/hyas-core/actions/workflows/codeql.yml)
+[![npm (scoped)](https://img.shields.io/npm/v/@hyas/core?style=flat-square)](https://www.npmjs.com/package/@hyas/core)
 
 ## Installation
 
 ```bash
-npm i @hyas/core -D
+npm i -D @hyas/core
 ```
 
 ## Setup
 
-Add to `./config/_default/module.toml`:
+Add mounts to `./config/_default/module.toml`:
 
 ```toml
 [[mounts]]
@@ -34,7 +34,7 @@ Add to `./config/_default/module.toml`:
   target = "layouts"
 ```
 
-Add to `./config/_default/config.toml`:
+Add to `./config/_default/hugo.toml`:
 
 ```toml
 baseurl = "https://hyas.netlify.app/"
@@ -50,12 +50,12 @@ paginate = 7
 rssLimit = 10
 
 [outputs]
-  home = ["HTML", "RSS"]
+  home = ["HTML"]
 
 [caches]
   [caches.getjson]
     dir = ":cacheDir/:project"
-    maxAge = "10s"
+    maxAge = "30m"
 
 [sitemap]
   changefreq = "monthly"
@@ -66,20 +66,14 @@ rssLimit = 10
   keepWhitespace = false
 ```
 
-Add to `./config/_default/params.toml`:
+## How to use
 
-```toml
-## Chrome Browser
-themeColor = "#fff"
+See the Hyas documentation:
 
-# Feed
-copyRight = "Copyright (c) 2020-2021 Henk Verlinde"
-```
-
-## Usage
-
-See the Hyas docs: [Quick Start](https://gethyas.com/docs/prologue/quick-start/)
+- [Core](https://docs.gethyas.com/guides/integrations-guide/core/)
 
 ## Credits
 
-Minimal files setup is based on [Really getting started with Hugo](https://www.brycewray.com/posts/2022/07/really-getting-started-hugo/).
+This npm package is based on:
+
+- [Really getting started with Hugo](https://www.brycewray.com/posts/2022/07/really-getting-started-hugo/)
