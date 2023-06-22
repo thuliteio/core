@@ -1,14 +1,12 @@
 {
   "name": "@hyas/core",
+  "version": "1.0.1",
   "description": "Hyas core",
-  "version": "1.0.0",
-  "browserslist": [
-    "defaults"
-  ],
-  "repository": "https://github.com/h-enk/hyas-core",
+  "author": "Hyas",
   "license": "MIT",
-  "publishConfig": {
-    "access": "public"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gethyas/core.git"
   },
   "scripts": {
     "clean:install": "shx rm -rf package-lock.json node_modules",
@@ -18,5 +16,8 @@
   "devDependencies": {
     "auto-changelog": "^2.4.0",
     "shx": "^0.3.4"
+  },
+  "engines": {
+    "node": ">=16.12.0"
   }
 }
