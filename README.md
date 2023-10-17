@@ -9,7 +9,7 @@ Official core integration for Hyas.
 ## Installation
 
 ```bash
-npm i -D @hyas/core
+npm i @hyas/core
 ```
 
 ## Setup
@@ -55,7 +55,19 @@ rssLimit = 10
 [caches]
   [caches.getjson]
     dir = ":cacheDir/:project"
-    maxAge = "30m"
+    maxAge = -1
+  [caches.getcsv]
+    dir = ":cacheDir/:project"
+    maxAge = -1
+  [caches.images]
+    dir = ":cacheDir/images"
+    maxAge = "1440h"
+  [caches.assets]
+    dir = ":cacheDir/:project"
+    maxAge = -1
+  [caches.getresource]
+    dir = ":cacheDir/:project"
+    maxage = '1h'
 
 [sitemap]
   changefreq = "monthly"

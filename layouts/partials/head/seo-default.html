@@ -3,3 +3,11 @@
 {{ else -}}
   <title>{{ .Title }} {{ .Site.Params.titleSeparator }} {{ .Site.Params.title }}</title>
 {{ end -}}
+
+{{- $description := "" }}
+{{- if .Params.description }}
+	{{ $description = .Params.description }}
+{{- else }}
+  {{ $description = site.Params.Description }}
+{{- end }}
+<meta name="description" content="{{ $description }}">
