@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 1.2.0
+
+### Minor Changes
+
+- [#7](https://github.com/gethyas/core/pull/7) [`e62432e`](https://github.com/gethyas/core/commit/e62432e1cb97d40c2c12289aadb660f98303799f) Thanks [@h-enk](https://github.com/h-enk)! - Move dependencies from gethyas to @hyas/core
+
 ## 1.1.0
 
 ### Minor Changes
