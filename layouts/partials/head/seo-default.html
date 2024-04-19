@@ -1,8 +1,10 @@
-{{ if .IsHome -}}
-  <title>{{ .Site.Params.title }} {{ .Site.Params.titleSeparator }} {{ .Site.Params.titleAddition }}</title>
-{{ else -}}
-  <title>{{ .Title }} {{ .Site.Params.titleSeparator }} {{ .Site.Params.title }}</title>
-{{ end -}}
+{{- $title := "" }}
+{{- if .Params.title }}
+	{{ $title = .Params.title }}
+{{- else }}
+  {{ $title = site.Params.title }}
+{{- end }}
+<title>{{ $title }}</title>
 
 {{- $description := "" }}
 {{- if .Params.description }}
