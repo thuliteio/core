@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 1.3.0
+
+### Minor Changes
+
+- [#10](https://github.com/gethyas/core/pull/10) [`0c558ca`](https://github.com/gethyas/core/commit/0c558ca881697b6877e6b710debbc40e2b5991df) Thanks [@h-enk](https://github.com/h-enk)! - Update dependencies to latest versions
+
 ## 1.2.1
 
 ### Patch Changes
