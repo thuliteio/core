@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 1.3.1
+
+### Patch Changes
+
+- [#11](https://github.com/gethyas/core/pull/11) [`095f42d`](https://github.com/gethyas/core/commit/095f42dd2c147515ebe317102f48433915d53f0d) Thanks [@h-enk](https://github.com/h-enk)! - Remove vite dependency
+
 ## 1.3.0
 
 ### Minor Changes
