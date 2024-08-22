@@ -1,3 +1,3 @@
 'use strict';
 
-import '@hyas/core/assets/js/core.js';
+import '@thulite/core/assets/js/core.js';

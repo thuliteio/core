@@ -1,12 +1,12 @@
 # Core
 
-Official Core integration for Hyas.
+Official Core integration for Thulite.
 
 ## Getting Started
 
-See the Hyas documentation:
+See the Thulite documentation:
 
-- [Core](https://docs.gethyas.com/guides/integrations/core/)
+- [Core](https://docs.thulite.io/guides/integrations/core/)
 
 ## Credits
 
