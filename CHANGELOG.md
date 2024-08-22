@@ -1,5 +1,15 @@
 # @hyas/core
 
+## 1.4.0
+
+### Minor Changes
+
+- [#13](https://github.com/thuliteio/core/pull/13) [`9c4c63b`](https://github.com/thuliteio/core/commit/9c4c63b4b4310f69fef66ffe07d184c832f6b6c7) Thanks [@h-enk](https://github.com/h-enk)! - Update for migration from Hyas to Thulite
+
+### Patch Changes
+
+- [#12](https://github.com/thuliteio/core/pull/12) [`f1dd1be`](https://github.com/thuliteio/core/commit/f1dd1bebdb78565915a15ef724b3de26b47eb235) Thanks [@jollydodo](https://github.com/jollydodo)! - Google Quicklink optimization/fixes
+
 ## 1.3.1
 
 ### Patch Changes
