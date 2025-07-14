@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 1.5.1
+
+### Patch Changes
+
+- [#18](https://github.com/thuliteio/core/pull/18) [`37b4d6f`](https://github.com/thuliteio/core/commit/37b4d6f05f3d989a1de8d8d0b5c5f3e552edbc4b) Thanks [@h-enk](https://github.com/h-enk)! - Add favicon link rel elements
+
 ## 1.5.0
 
 ### Minor Changes
