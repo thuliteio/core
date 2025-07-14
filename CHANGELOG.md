@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 1.5.0
+
+### Minor Changes
+
+- [#17](https://github.com/thuliteio/core/pull/17) [`57df54f`](https://github.com/thuliteio/core/commit/57df54fe4ac81d729ee1bb1d6c9b139cce039697) Thanks [@h-enk](https://github.com/h-enk)! - Bump dependencies to their latest versions
+
 ## 1.4.0
 
 ### Minor Changes
