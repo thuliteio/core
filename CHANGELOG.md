@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 1.5.4
+
+### Patch Changes
+
+- [#23](https://github.com/thuliteio/core/pull/23) [`0b74dbe`](https://github.com/thuliteio/core/commit/0b74dbe66649ad9cd29eabb827e09845c393478c) Thanks [@h-enk](https://github.com/h-enk)! - Update templates.Exists check
+
 ## 1.5.3
 
 ### Patch Changes
