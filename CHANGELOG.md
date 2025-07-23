@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 1.5.3
+
+### Patch Changes
+
+- [#21](https://github.com/thuliteio/core/pull/21) [`b574f11`](https://github.com/thuliteio/core/commit/b574f112b753ca59fa1aef714c21e1dc15328e62) Thanks [@h-enk](https://github.com/h-enk)! - Remove layouts/home.html and layouts/single.html as part of a larger refactoring effort to simplify the codebase and improve maintainability. These layouts were deemed redundant and are not being replaced. Users relying on these layouts should update their code to use alternative layouts or templates provided in the project.
+
 ## 1.5.2
 
 ### Patch Changes
