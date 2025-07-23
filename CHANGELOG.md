@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 1.5.2
+
+### Patch Changes
+
+- [#19](https://github.com/thuliteio/core/pull/19) [`864191a`](https://github.com/thuliteio/core/commit/864191acd5c95b1f0f1271d67558aafe9bca87f7) Thanks [@h-enk](https://github.com/h-enk)! - Updated template parsing to support Hugo v0.146.0 syntax changes, including migration of deprecated template functions and addition of new syntax features.
+
 ## 1.5.1
 
 ### Patch Changes
