@@ -4,7 +4,7 @@
   {{ partial "head/body-class.html" . }}
   <body class="{{ delimit (.Scratch.Get "class") " " }}">
     {{ block "main" . }}{{ end }}
-    {{ if templates.Exists "partials/footer/script-footer.html" -}}
+    {{ if templates.Exists "_partials/footer/script-footer.html" -}}
       {{ partial "footer/script-footer.html" . }}
     {{ else -}}
       {{ partial "footer/script-footer-core.html" . }}
