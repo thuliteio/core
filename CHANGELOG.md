@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 1.5.5
+
+### Patch Changes
+
+- [#25](https://github.com/thuliteio/core/pull/25) [`13579dd`](https://github.com/thuliteio/core/commit/13579dd14a91c0781ac5bd82f72a360d892766d1) Thanks [@h-enk](https://github.com/h-enk)! - Fix \_partial paths
+
 ## 1.5.4
 
 ### Patch Changes
