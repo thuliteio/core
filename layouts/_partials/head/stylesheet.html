@@ -1,2 +1,16 @@
 {{ partial "head/libsass" "scss/app.scss"}}
+{{- $cssVars := dict }}
+{{- if reflect.IsMap site.Params.cssVars }}
+  {{- $cssVars = merge $cssVars site.Params.cssVars }}
+{{- end }}
+{{- if reflect.IsMap page.Params.cssVars }}
+  {{ warnf "%s" page.Params.cssVars }}
+  {{- $cssVars = merge $cssVars page.Params.cssVars }}
+{{- end }}
+{{- if gt (len $cssVars) 0 }}
+<style>:root {
+  {{- range $k, $v := $cssVars }} --{{- $k -}}:{{- $v | safeCSS -}};{{- end }}
+}
+</style>
+{{- end }}
 <noscript><style>img.lazyload { display: none; }</style></noscript>
