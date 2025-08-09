@@ -1,0 +1,31 @@
+{{- $cssVars := dict }}
+{{- if reflect.IsMap site.Params.cssVars }}
+  {{- $cssVars = merge $cssVars site.Params.cssVars }}
+{{- end }}
+{{- if reflect.IsMap page.Params.cssVars }}
+  {{ warnf "%s" page.Params.cssVars }}
+  {{- $cssVars = merge $cssVars page.Params.cssVars }}
+{{- end }}
+{{- $cssPropertiesVal := "" }}
+{{- $cssStyleHashes := slice }}
+{{- if gt (len $cssVars) 0 }}
+  {{- $cssProperties := slice }}
+  {{- $cssPropertiesVal = ":root {" -}}
+  {{- range $k, $v := $cssVars }}
+    {{- $cssProperties = $cssProperties | append (slice (printf " --%s: %s" $k $v)) }}
+  {{- end }}
+  {{- $cssPropertiesVal = add $cssPropertiesVal (delimit $cssProperties ";\n") "}" }}
+{{- end }}
+{{- $noscriptStyle := "img.lazyload { display:none; }" }}
+{{- $cssPropertiesCSS := resources.FromString "css/cssProperties.css" $cssPropertiesVal }}
+{{- $cssPropertiesCSS = $cssPropertiesCSS | resources.Minify | resources.Fingerprint "sha512" }}
+{{- $cssStyleHashes = $cssStyleHashes | append (slice $cssPropertiesCSS.Data.Integrity) }}
+{{- $cssNoscriptCSS := resources.FromString "css/Noscript.css" $noscriptStyle }}
+{{- $cssNoscriptCSS = $cssNoscriptCSS | resources.Minify | resources.Fingerprint "sha512" }}
+{{- $cssStyleHashes = $cssStyleHashes | append (slice $cssNoscriptCSS.Data.Integrity) }}
+{{- return (dict
+  "cssPropertiesCSS" $cssPropertiesCSS
+  "cssNoscriptCSS" $cssNoscriptCSS
+  "hashes" $cssStyleHashes
+) }}
+{{- /* */ -}}
