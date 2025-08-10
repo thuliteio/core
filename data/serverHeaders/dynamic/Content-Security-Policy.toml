@@ -20,8 +20,9 @@
 "script-src" = [
   "'self'",
   "##VAR_analytics##",
-  "'sha256-aWZ3y/RxbBYKHXH0z8+8ljrHG1mSBvyzSfxSMjBSaXk='"
+  "'##VAR_scriptHashes##'"
 ]
+
 "style-src" = [
   "'self'",
   "'##VAR_styleHashes##'"
