@@ -1,0 +1,5 @@
+{{- $styleHashes := (union
+  ((partial "head/stylesheet-hashes.html" .).hashes)
+  ((partial "head/libsass-hash.html" "scss/app.scss").hashes)
+) -}}
+{{- return $styleHashes -}}

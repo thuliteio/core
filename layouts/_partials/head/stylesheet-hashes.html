@@ -1,0 +1,10 @@
+{{- $cssStyleHashes := slice }}
+{{- $noscriptStyle := "img.lazyload { display:none; }" }}
+{{- $cssNoscriptCSS := resources.FromString "css/Noscript.css" $noscriptStyle }}
+{{- $cssNoscriptCSS = $cssNoscriptCSS | resources.Minify | resources.Fingerprint "sha512" }}
+{{- $cssStyleHashes = $cssStyleHashes | append (slice $cssNoscriptCSS.Data.Integrity) }}
+{{- return (dict
+  "cssNoScript" (slice $cssNoscriptCSS)
+  "hashes" $cssStyleHashes
+) }}
+{{- /* */ -}}

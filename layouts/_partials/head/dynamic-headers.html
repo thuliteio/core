@@ -1,0 +1,80 @@
+{{- $curPage := .Page }}
+{{- $headersDict := dict }}
+{{- range $header, $valueMap := site.Data.serverHeaders.dynamic }}
+  {{- $valueString := "" }}
+  {{- if not (reflect.IsMap $valueMap) }}
+    {{- errorf "Dynamic header '%s' is not a map in 'data'" $header }}
+  {{- end }}
+  {{- $delimiter := $valueMap.delimiter }}
+  {{- $subDelimiter := $valueMap.subDelimiter }}
+  {{- if reflect.IsMap $valueMap.subFields }}
+    {{- $fieldDelim := "" }}
+    {{- range $field, $value := $valueMap.subFields }}
+      {{- $subFieldNewValue := "" }}
+      {{- if reflect.IsSlice $value }}
+        {{- $subFieldNewValue = partial "buildSubField.html" (dict
+          "Page" $curPage
+          "subFieldName" $field
+          "subFieldOldValue" $subFieldNewValue
+          "subFieldNewValue" (index $value 0)
+          "valueDelim" ""
+        ) }}
+        {{- range after 1 $value }}
+          {{- $subFieldNewValue = partial "buildSubField.html" (dict
+            "Page" $curPage
+            "subFieldName" $field
+            "subFieldOldValue" $subFieldNewValue
+            "subFieldNewValue" .
+            "valueDelim" $subDelimiter
+          ) }}
+        {{- end }}
+      {{- else }}
+        {{- $subFieldNewValue = partial "buildSubField.html" (dict
+          "Page" $curPage
+          "subFieldName" $field
+          "subFieldNewValue" $value
+          "subFieldOldValue" ""
+          "valueDelim" ""
+        ) }}
+      {{- end }}
+      {{- if $subFieldNewValue }}
+        {{- $valueString = (add $valueString $fieldDelim $field " " $subFieldNewValue) }}
+      {{- end }}
+      {{- if not $fieldDelim }}
+        {{- $fieldDelim = $delimiter }}
+      {{- end }}
+    {{- end }}
+  {{- else }}
+    {{- errorf "Dynamic header '%s' missing subFields map" $header }}
+  {{- end }}
+  {{- $headersDict = merge $headersDict (dict $header $valueString) }}
+{{- end }}
+{{- return $headersDict -}}
+
+{{ define "_partials/buildSubField.html" }}
+  {{- $curPage := .Page }}
+  {{- $subField := .subFieldName }}
+  {{- $value := .subFieldNewValue }}
+  {{- $oldValue := .subFieldOldValue }}
+  {{- $valueDelim := .valueDelim }}
+  {{- $newValue := "" }}
+  {{- $customVar := findRESubmatch `^["']?##VAR_([0-9a-zA-Z-]+)##['"]?$` $value }}
+  {{- $customQuotes := findRESubmatch `^(["'])?##VAR_[0-9a-zA-Z-]+##['"]?$` $value }}
+  {{- if and $customVar (index (index $customVar 0) 1) }}
+    {{- $customVar = (index (index $customVar 0) 1) }}
+    {{- if templates.Exists (printf "_partials/head/header-custom-values/var-%s.html" $customVar) }}
+      {{- $customValue := partial (printf "head/header-custom-values/var-%s.html" $customVar) $curPage }}
+      {{- if reflect.IsSlice $customValue }}
+        {{- if and $customQuotes (index (index $customQuotes 0) 1) }}
+          {{- $customQuotes = index (index $customQuotes 0) 1 }}
+          {{- $customValue = add $customQuotes (delimit $customValue (add $customQuotes $valueDelim $customQuotes)) $customQuotes }}
+        {{- else }}
+          {{- $customValue = delimit $customValue $valueDelim }}
+        {{- end }}
+      {{- end }}
+      {{- $value = $customValue }}
+    {{- end }}
+  {{- end }}
+  {{- $newValue = (add $oldValue $valueDelim $value) }}
+  {{- return $newValue }}
+ {{ end }}

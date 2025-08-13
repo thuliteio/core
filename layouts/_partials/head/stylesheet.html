@@ -1,2 +1,13 @@
-{{ partial "head/libsass" "scss/app.scss"}}
-<noscript><style>img.lazyload { display: none; }</style></noscript>
+{{ $cssDict := partial "head/libsass-hash.html" "scss/app.scss" }}
+{{- $styleDict := partial "head/stylesheet-hashes.html" . }}
+{{- $styleDict = merge $styleDict $cssDict }}
+{{- with $styleDict.cssNoScript }}
+  {{- range . }}
+<noscript><style>{{- .Content | safeCSS -}}</style></noscript>
+  {{- end }}
+{{- end }}
+{{- with $styleDict.cssSrc }}
+  {{- range . }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+  {{- end }}
+{{- end }}
