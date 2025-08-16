@@ -36,6 +36,12 @@ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,END,R=301]
     {{- range $from, $to := $redirects }}
       {{- $url := urls.Parse $from }}
       {{- if not $url.Scheme }}
+        {{- if hasSuffix $from "*" }}
+          {{- $from = printf "%s(.*)" (strings.TrimSuffix "*" $from) }}
+        {{- end }}
+        {{- if hasSuffix $to ":splat" }}
+          {{- $to = printf "%s$1" (strings.TrimSuffix ":splat" $to) }}
+        {{- end }}
 Redirect {{ $status }} {{ $from }} {{ $to }}
       {{- end }}
     {{- end }}
