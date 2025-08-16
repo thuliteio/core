@@ -1,0 +1,43 @@
+<IfModule mod_headers.c>
+{{- $headers := partial "collect-headers.html" . }}
+{{- range $header, $value := $headers }}
+  {{- if reflect.IsSlice $value }}
+Header setifempty {{ $header }} "{{- index $value 0 -}}"
+    {{- range after 1 $value }}
+Header append {{ $header }} "{{- . -}}"
+    {{- end }}
+  {{- else if $value }}
+Header setifempty {{ $header }} "{{- $value -}}"
+  {{- end }}
+{{- end }}
+</IfModule>
+
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+{{- $redirectMap := partial "collect-redirects.html" . }}
+{{- range $status, $redirects := $redirectMap }}
+  {{- if reflect.IsMap $redirects }}
+    {{- range $from, $to := $redirects }}
+      {{- $url := urls.Parse $from }}
+      {{- if $url.Scheme }}
+RewriteCond %{HTTP_HOST} ^{{ $url.Host }}$
+RewriteRule (.*) {{ site.BaseURL }}$1 [QSA,END,R=301]
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,END,R=301]
+{{- range $status, $redirects := $redirectMap }}
+  {{- if reflect.IsMap $redirects }}
+    {{- range $from, $to := $redirects }}
+      {{- $url := urls.Parse $from }}
+      {{- if not $url.Scheme }}
+Redirect {{ $status }} {{ $from }} {{ $to }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+</IfModule>

@@ -1,0 +1,41 @@
+{{ $ctx := . }}
+{{ $curPage := .Page }}
+{{- with site.Data.serverRedirects.domains.redirectDomains }}
+  {{- range . }}
+http://{{- . -}}/* {{ or site.Data.serverRedirects.domains.targetScheme "https" -}}://{{- site.Data.serverRedirects.domains.targetDomain -}}/:splat 301!
+https://{{- . -}}/* {{ or site.Data.serverRedirects.domains.targetScheme "https" -}}://{{- site.Data.serverRedirects.domains.targetDomain -}}/:splat 301!
+  {{- end }}
+{{- end }}
+{{- if ne (or site.Data.serverRedirects.domains.targetScheme "https") "http" }}
+http://{{- site.Data.serverRedirects.domains.targetDomain -}}/* {{ or site.Data.serverRedirects.domains.targetScheme "https" -}}://{{- site.Data.serverRedirects.domains.targetDomain -}}/:splat 301!
+{{- end }}
+{{- with site.Pages }}
+  {{- range . }}
+    {{- if .Aliases }}
+      {{- $rTarget := .RelPermalink }}
+      {{- range .Aliases }}
+{{ . }} {{ $rTarget }} 301!
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- with (index site.Data.serverRedirects "path-status") }}
+  {{- range $status, $redirects := . }}
+    {{- range $redirects }}
+      {{- if ne (len (split . " " )) 2 }}
+        {{- errorf "Redirect '%s' invalid (wrong number of spaces)" . }}
+      {{- end }}
+{{ . }} {{ $status }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- with site.Data.serverRedirects.wildcard }}
+  {{- range $status, $redirects := . }}
+    {{- range $redirects }}
+      {{- if ne (len (split . " " )) 2 }}
+        {{- errorf "Redirect '%s' invalid (wrong number of spaces)" . }}
+      {{- end }}
+{{ . }} {{ $status }}
+    {{- end }}
+  {{- end }}
+{{- end }}

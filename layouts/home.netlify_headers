@@ -1,0 +1,11 @@
+/*
+{{- $dynamicHeaders := partial "head/dynamic-headers.html" . }}
+{{- range $header, $value := (merge site.Data.serverHeaders.static $dynamicHeaders) }}
+  {{- if reflect.IsSlice $value }}
+    {{- range $value }}
+  {{ $header -}}: {{ . -}}
+    {{- end }}
+  {{- else if $value }}
+  {{ $header -}}: {{ $value -}}
+  {{- end }}
+{{- end }}
