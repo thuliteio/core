@@ -1,0 +1,2 @@
+{{- $headers := partial "collect-headers.html" . -}}
+{{- jsonify $headers -}}

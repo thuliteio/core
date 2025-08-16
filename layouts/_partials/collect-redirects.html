@@ -1,0 +1,62 @@
+{{- $ctx := . }}
+{{- $curPage := .Page }}
+{{- $redirects := dict }}
+{{- $domainRedirectValues := dict }}
+{{- with site.Data.serverRedirects.domains.redirectDomains }}
+  {{- range . }}
+    {{- $srcValue := printf "http://%s/*" . }}
+    {{- $redirValue := printf "%s://%s/:splat" (or site.Data.serverRedirects.domains.targetScheme "https")  site.Data.serverRedirects.domains.targetDomain }}
+    {{- $domainRedirectValues = merge $domainRedirectValues (dict
+      $srcValue $redirValue
+    ) }}
+  {{- end }}
+{{- end }}
+{{- if ne (or site.Data.serverRedirects.domains.targetScheme "https") "http" }}
+  {{- $srcValue := printf "http://%s/*" site.Data.serverRedirects.domains.targetDomain }}
+  {{- $redirValue := printf "%s://%s/:splat"  (or site.Data.serverRedirects.domains.targetScheme "https") site.Data.serverRedirects.domains.targetDomain }}
+  {{- $domainRedirectValues = merge $domainRedirectValues (dict
+    $srcValue $redirValue
+  ) }}
+{{- end }}
+{{- $hard301 := (dict "301!" $domainRedirectValues )}}
+{{- $redirects = merge $redirects $hard301 }}
+{{- $aliasRedirects := dict }}
+{{- with site.Pages }}
+  {{- range . }}
+    {{- if .Aliases }}
+      {{- $rTarget := .RelPermalink }}
+      {{- range .Aliases }}
+        {{- $srcValue := . }}
+        {{- $aliasRedirects = merge $aliasRedirects (dict
+          $srcValue $rTarget
+        ) }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- $hard301 := (dict "301!" $aliasRedirects )}}
+{{- $redirects = merge $redirects $hard301 }}
+{{- $regularRedirects := dict }}
+{{- $extraRedirects := dict }}
+{{- with (index site.Data.serverRedirects "path-status") }}
+  {{- $extraRedirects = merge $extraRedirects . }}
+{{- end }}
+{{- with site.Data.serverRedirects.wildcard }}
+  {{- $extraRedirects = merge $extraRedirects . }}
+{{- end }}
+{{- with $extraRedirects }}
+  {{- range $status, $redirects := . }}
+    {{- range $redirects }}
+      {{- $splitRedir := split . " " }}
+      {{- if eq (len $splitRedir) 2 }}
+        {{- $regularRedirects = merge $regularRedirects (dict
+        $status (dict (index $splitRedir 0) (index $splitRedir 1))
+        ) }}
+      {{- else }}
+        {{- errorf "Redirect '%s' invalid (wrong number of spaces)" . }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- $redirects = merge $redirects $regularRedirects }}
+{{- return $redirects -}}
