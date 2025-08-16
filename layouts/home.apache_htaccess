@@ -16,12 +16,13 @@ ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
+{{- $siteUrl := urls.Parse site.BaseURL }}
 {{- $redirectMap := partial "collect-redirects.html" . }}
 {{- range $status, $redirects := $redirectMap }}
   {{- if reflect.IsMap $redirects }}
     {{- range $from, $to := $redirects }}
       {{- $url := urls.Parse $from }}
-      {{- if $url.Scheme }}
+      {{- if and $url.Scheme (ne $siteUrl.Host $url.Host) }}
 RewriteCond %{HTTP_HOST} ^{{ $url.Host }}$
 RewriteRule (.*) {{ site.BaseURL }}$1 [QSA,END,R=301]
       {{- end }}
