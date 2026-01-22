@@ -1,5 +1,13 @@
 # @hyas/core
 
+## 1.5.6
+
+### Patch Changes
+
+- [#38](https://github.com/thuliteio/core/pull/38) [`105ce02`](https://github.com/thuliteio/core/commit/105ce02c04f2cd74763323723a7cc69de9cd464f) Thanks [@h-enk](https://github.com/h-enk)! - Add HTML comment signature
+
+- [#37](https://github.com/thuliteio/core/pull/37) [`59ae244`](https://github.com/thuliteio/core/commit/59ae2442b2cc805f78dbba0ca46f0d4643de83aa) Thanks [@h-enk](https://github.com/h-enk)! - Updates Babel, autoprefixer, Prettier, and changesets-related packages to their latest versions.
+
 ## 1.5.5
 
 ### Patch Changes
