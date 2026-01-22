@@ -2,4 +2,4 @@
 "@thulite/core": patch
 ---
 
-Bumps dependencies to their latest versions
+Updates Babel, autoprefixer, Prettier, and changesets-related packages to their latest versions.
