@@ -15,7 +15,7 @@
         "@babel/cli": "^7.28.6",
         "@babel/core": "^7.28.6",
         "@babel/preset-env": "^7.28.6",
-        "@fullhuman/postcss-purgecss": "^7.0.2",
+        "@fullhuman/postcss-purgecss": "^8.0.0",
         "autoprefixer": "^10.4.23",
         "lazysizes": "^5.3.2",
         "modern-css-reset": "^1.4.0",
