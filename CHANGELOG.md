@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 1.5.7
+
+### Patch Changes
+
+- [#44](https://github.com/thuliteio/core/pull/44) [`db8417b`](https://github.com/thuliteio/core/commit/db8417b7e493626499b118e42a4eaa7912b792bf) Thanks [@h-enk](https://github.com/h-enk)! - Bump dependencies to their latest versions
+
 ## 1.5.6
 
 ### Patch Changes
