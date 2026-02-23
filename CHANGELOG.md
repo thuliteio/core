@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 1.5.8
+
+### Patch Changes
+
+- [#45](https://github.com/thuliteio/core/pull/45) [`256d67d`](https://github.com/thuliteio/core/commit/256d67dba68631b03a54482ae19672b394fd8be6) Thanks [@h-enk](https://github.com/h-enk)! - Bump versions minimatch and glob to latest
+
 ## 1.5.7
 
 ### Patch Changes
