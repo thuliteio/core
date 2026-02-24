@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 1.5.9
+
+### Patch Changes
+
+- [#46](https://github.com/thuliteio/core/pull/46) [`7eba4e0`](https://github.com/thuliteio/core/commit/7eba4e03138f7cf1efe7138f1d7d4a3584df3817) Thanks [@h-enk](https://github.com/h-enk)! - Drop dependency purgecss-whitelister (no need)
+
 ## 1.5.8
 
 ### Patch Changes
