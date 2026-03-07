@@ -1,0 +1,3 @@
+{{- $dynamicHeaders := partial "head/dynamic-headers.html" . }}
+{{- $headers := merge site.Data.serverHeaders.static $dynamicHeaders }}
+{{- return $headers -}}

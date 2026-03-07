@@ -1,0 +1,7 @@
+{{- $scriptHashes := slice }}
+{{- $footerScriptHash := partial "footer/esbuild" (dict "src" "js/app.js" "targetPath" "main.js" "load" "async" "transpile" false) -}}
+{{- with $footerScriptHash }}
+  {{- with .hash }}
+    {{- $scriptHashes = $scriptHashes | append . }}
+  {{- end }}
+{{- end -}}

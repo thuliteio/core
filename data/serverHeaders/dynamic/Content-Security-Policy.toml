@@ -1,0 +1,29 @@
+"delimiter" = "; "
+"subDelimiter" = " "
+
+[subFields]
+"default-src" = "'self'"
+"manifest-src" = "'self'"
+
+"connect-src" = [
+    "'self'",
+    "##VAR_analytics##"
+]
+
+"font-src" = ""
+
+"img-src" = [
+  "'self'",
+  "data:"
+]
+
+"script-src" = [
+  "'self'",
+  "##VAR_analytics##",
+  "'##VAR_scriptHashes##'"
+]
+
+"style-src" = [
+  "'self'",
+  "'##VAR_styleHashes##'"
+]
