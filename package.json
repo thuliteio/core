@@ -8,6 +8,9 @@
         "type": "git",
         "url": "https://github.com/thuliteio/core.git"
     },
+    "bin": {
+        "thulite-portless": "./scripts/portless.js"
+    },
     "scripts": {
         "format": "prettier **/** -w -c"
     },
