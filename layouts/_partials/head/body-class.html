@@ -1,21 +1,32 @@
+{{- /* Generate CSS body classes for templating and styling
+  * Output: Sets .Scratch "class" with slice of [template-type page-identifier]
+  * Examples: ["single" "home"], ["list" "section-blog"], ["single" "about"]
+*/ -}}
 {{- $template := "" -}}
-{{- if or (eq .Kind "404") (eq .Kind "page") (eq .Kind "home") -}}
-  {{ $template = "single" -}}
-{{- else if or (eq .Kind "section") (eq .Kind "taxonomy") (eq .Kind "term") -}}
-  {{ $template = "list" -}}
-{{- end -}}
-{{- $name := "" -}}
-{{- if eq .Kind "taxonomy" -}}
-  {{- $name = printf "taxonomy %s" .Data.Plural -}}
-{{- else if eq .Kind "term" -}}
-  {{- $name = printf "term %s" .Section -}}
-{{- else if .Section -}}
-  {{- $name = printf "section %s" .Section -}}
-{{- else if eq .Kind "page" -}}
-  {{- $name = .File.ContentBaseName -}}
-{{- else if eq .Kind "home" -}}
-  {{- $name = "home" -}}
+{{- $identifier := "" -}}
+
+{{- /* Determine template type and page identifier */ -}}
+{{- if eq .Kind "home" -}}
+  {{- $template = "single" -}}
+  {{- $identifier = "home" -}}
 {{- else if eq .Kind "404" -}}
-  {{- $name = "error404" -}}
+  {{- $template = "single" -}}
+  {{- $identifier = "error-404" -}}
+{{- else if eq .Kind "page" -}}
+  {{- $template = "single" -}}
+  {{- $identifier = .File.ContentBaseName -}}
+{{- else if eq .Kind "taxonomy" -}}
+  {{- $template = "list" -}}
+  {{- $identifier = printf "taxonomy-%s" .Data.Plural -}}
+{{- else if eq .Kind "term" -}}
+  {{- $template = "list" -}}
+  {{- $identifier = printf "term-%s" .Section -}}
+{{- else if or (eq .Kind "section") .Type -}}
+  {{- $template = "list" -}}
+  {{- $identifier = printf "section-%s" (.Type | default .Section) -}}
+{{- else -}}
+  {{- $template = "single" -}}
+  {{- $identifier = "unknown" -}}
 {{- end -}}
-{{- .Scratch.Set "class" (slice $template $name) -}}
+
+{{- .Scratch.Set "class" (slice $template $identifier) -}}

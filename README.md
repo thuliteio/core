@@ -6,7 +6,7 @@ Official Core integration for Thulite.
 
 See the Thulite documentation:
 
-- [Core](https://docs.thulite.io/guides/integrations/core/)
+- [Core](https://docs.thulite.io/thulite/)
 
 ## Credits
 

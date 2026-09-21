@@ -1,11 +1,12 @@
 {
     "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
     "changelog": ["@changesets/changelog-github", { "repo": "thuliteio/core" }],
-    "commit": false,
+    "commit": true,
     "fixed": [],
     "linked": [],
-    "access": "restricted",
+    "access": "public",
     "baseBranch": "main",
     "updateInternalDependencies": "patch",
-    "ignore": []
+    "ignore": [],
+    "privatePackages": { "version": false, "publish": false }
 }

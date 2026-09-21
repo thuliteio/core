@@ -1,10 +1,15 @@
 <!doctype html>
-<html lang="{{ .Site.Language.Locale | default "en" }}">
-  {{ partial "head/head.html" . }}
-  {{ partial "head/body-class.html" . }}
-  <body class="{{ delimit (.Scratch.Get "class") " " }}">
+<html lang="{{ .Site.Language | default "en" }}">
+  {{ partial "head/head.html" . -}}
+
+  {{- /* Generate body CSS classes before body tag */ -}}
+  {{ partial "head/body-class.html" . -}}
+
+  <body{{ with (.Scratch.Get "class") }} class="{{ delimit . " " }}"{{ end }}>
     {{ block "main" . }}{{ end }}
-    {{ if templates.Exists "_partials/footer/script-footer.html" -}}
+
+    {{- /* Load footer scripts: use custom script-footer.html if available, otherwise use core */ -}}
+    {{ if templates.Exists "footer/script-footer.html" -}}
       {{ partial "footer/script-footer.html" . }}
     {{ else -}}
       {{ partial "footer/script-footer-core.html" . }}

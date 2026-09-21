@@ -1,22 +1,29 @@
-{{- /* ESBUILD.HTML - Build javascript modules with esbuild
+{{- /* ESBUILD.HTML - Build javascript modules with esbuild and Babel
+  * This partial follows Hugo's official js.Build and js.Babel documentation patterns
+  * https://gohugo.io/functions/js/build/
+  * https://gohugo.io/functions/js/babel/
+  *
   * Simple Usage: {{ partial "esbuild" "js/file.js" }}
-  * Simple Usage: {{ partial "esbuild" (dict "src" "js/file.js" "load" "defer/async" "babel" true ) }}
+  * With options: {{ partial "esbuild" (dict "src" "js/file.js" "load" "defer" "babel" true ) }}
+  *
   * Parameters:
-  * src - javascript file to build, relative to assets folder. Must include file extension can be .js or .ts
+  * src (required) - javascript file to build, relative to assets folder. Must include file extension can be .js or .ts
   * load - can set to "defer" or "async" defaults to null.
-  * babel - set to true to transpile your js using babel. Note: all js is lowered to es6 by default.
-  * for babel you must have the required babel dependencies installed , and configured
-  * see hugo babel doc https://gohugo.io/hugo-pipes/babel
-  * use the babel option if esbuild can't handle lowering your es6+ code, or you wish to go lower than es6
-  * for unsupported es6+ syntax see
-  * https://esbuild.github.io/content-types/#javascript
+  * babel - set to true to use Babel for transpilation. Note: esbuild is used by default for bundling and transpilation.
+  *
+  * Build behavior (following Hugo's official patterns):
+  * - Development: Source maps enabled (linked for esbuild, inline for Babel), no minification
+  * - Production: No source maps, minified, fingerprinted with integrity hash for subresource integrity
+  *
+  * For babel you must have the required babel dependencies installed and a babel.config.js in project root.
+  * See https://gohugo.io/functions/js/babel/
   *
   * example for checking hugo env from js file
-  * 
+  *
   * import * as params from '@params';
-  * 
+  *
   * if (params.env === 'development') {
-  *   console.log('hugo deveolopment environment')
+  *   console.log('hugo development environment')
   * } else {
   *   console.log('hugo production environment')
   * }
@@ -61,19 +68,30 @@
 {{- end -}}
 {{- /* pass hugo env to the js file as a param */ -}}
 {{- $params := (dict "env" hugo.Environment) -}}
-{{- /* standard production configuration for es build */ -}}
-{{- $jsConfig := (dict "target" "es2015" "minify" "true" "params" $params) }}
-{{- $js := $resource | js.Build $jsConfig | fingerprint -}}
-{{- /* is .babelEs6 is set to true - use babel to lower to es6 */ -}}
+{{- /* declare $js variable */ -}}
+{{- $js := "" -}}
+{{- /* configure build options based on babel option */ -}}
 {{- if $babel -}}
-{{- $babelConfig := (dict "noComments" true "minified" true "config" "config/babel.module.config.js") -}}
-{{- $js = $resource| js.Build $jsConfig | babel $babelConfig | fingerprint -}}
+{{- /* use babel for transpilation following Hugo's pattern */ -}}
+{{- $opts := dict
+  "minified" (cond hugo.IsDevelopment false true)
+  "noComments" (cond hugo.IsDevelopment false true)
+  "sourceMap" (cond hugo.IsDevelopment "inline" "none")
+-}}
+{{- $js = $resource | js.Babel $opts -}}
+{{- else -}}
+{{- /* use esbuild for bundling and transpilation following Hugo's pattern */ -}}
+{{- $opts := dict
+  "minify" (cond hugo.IsDevelopment false true)
+  "sourceMap" (cond hugo.IsDevelopment "linked" "none")
+  "params" $params
+-}}
+{{- $js = $resource | js.Build $opts -}}
 {{- end -}}
-{{- if eq (hugo.Environment) "development" -}}
-{{- $jsConfig = (dict "sourceMap" "inline" "target" "es2015" "params" $params) -}}
-{{- $js = $resource | js.Build $jsConfig | fingerprint -}}
-{{ end -}}
+{{- /* apply fingerprint for subresource integrity in production */ -}}
+{{- if not hugo.IsDevelopment -}}
+{{- $js = $js | fingerprint -}}
+{{- end -}}
 
-<script {{ with $load }}{{ . | safeHTMLAttr }}{{ end }} 
-src="{{- $js.RelPermalink -}}"
-integrity="{{- $js.Data.Integrity -}}"></script>
+<script {{ with $load }}{{ . | safeHTMLAttr }}{{ end }}
+src="{{- $js.RelPermalink -}}"{{ if $js.Data.Integrity }} integrity="{{- $js.Data.Integrity -}}"{{ end }}></script>
