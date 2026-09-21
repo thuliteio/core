@@ -1,18 +1,25 @@
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {{"<!-- Built with Thulite — https://thulite.io -->" | safeHTML }}
-  {{ if templates.Exists "_partials/head/resource-hints.html" -}}
+
+  {{- /* Performance: optional resource hints (dns-prefetch, preconnect, preload) */ -}}
+  {{ if templates.Exists "head/resource-hints.html" -}}
     {{ partial "head/resource-hints.html" . }}
   {{ end -}}
+
+  {{- /* Stylesheets */ -}}
   {{ partial "head/stylesheet.html" . }}
-  {{ if templates.Exists "_partials/head/seo.html" -}}
+
+  {{- /* SEO: use custom seo.html if available, otherwise fall back to seo-default.html */ -}}
+  {{ if templates.Exists "head/seo.html" -}}
     {{ partial "head/seo.html" . }}
   {{ else -}}
     {{ partial "head/seo-default.html" . }}
   {{ end -}}
-  {{ if templates.Exists "_partials/head/script-header.html" -}}
+
+  {{- /* Optional: inline scripts or early-loaded dependencies (use sparingly) */ -}}
+  {{ if templates.Exists "head/script-header.html" -}}
     {{ partial "head/script-header.html" . }}
   {{ end -}}
 </head>
