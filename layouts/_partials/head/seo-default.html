@@ -1,37 +1,28 @@
-{{- /* Default SEO metadata
-  * Provides title, description, Open Graph tags, and favicon links
-  * Falls back to site-wide defaults if page-level params not provided
-  * Recommended page params: title, description, author, keywords
-*/ -}}
-
-{{- /* Page title: use page param or site default */ -}}
-{{- $title := .Params.title | default site.Params.title -}}
+{{- /* Default SEO metadata * Provides title, description, Open Graph tags, and favicon links *
+Falls back to site-wide defaults if page-level params not provided * Recommended page params: title,
+description, author, keywords */ -}} {{- /* Page title: use page param or site default */ -}} {{-
+$title := .Params.title | default site.Params.title -}}
 <title>{{ $title }}</title>
 
-{{- /* Page description: use page param or site default */ -}}
-{{- $description := .Params.description | default site.Params.description -}}
-<meta name="description" content="{{ $description }}">
+{{- /* Page description: use page param or site default */ -}} {{- $description :=
+.Params.description | default site.Params.description -}}
+<meta name="description" content="{{ $description }}" />
 
-{{- /* Optional author and keywords */ -}}
-{{ with .Params.author -}}
-  <meta name="author" content="{{ . }}">
-{{ end -}}
-{{ with .Params.keywords -}}
-  <meta name="keywords" content="{{ . }}">
-{{ end -}}
-
-{{- /* Open Graph tags for social sharing */ -}}
-<meta property="og:type" content="website">
-<meta property="og:title" content="{{ $title }}">
-<meta property="og:description" content="{{ $description }}">
+{{- /* Optional author and keywords */ -}} {{ with .Params.author -}}
+<meta name="author" content="{{ . }}" />
+{{ end -}} {{ with .Params.keywords -}}
+<meta name="keywords" content="{{ . }}" />
+{{ end -}} {{- /* Open Graph tags for social sharing */ -}}
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $description }}" />
 {{ with .Permalink -}}
-  <meta property="og:url" content="{{ . }}">
-{{ end -}}
+<meta property="og:url" content="{{ . }}" />
+{{ end -}} {{- /* Canonical URL to prevent duplicate content issues */ -}}
+<link rel="canonical" href="{{ .Permalink }}" />
 
-{{- /* Canonical URL to prevent duplicate content issues */ -}}
-<link rel="canonical" href="{{ .Permalink }}">
-
-{{- /* Favicon links – https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs */ -}}
-<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="48x48">
-<link rel="icon" href="{{ "icon.svg" | relURL }}" type="image/svg+xml">
-<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
+{{- /* Favicon links –
+https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs */ -}}
+<link rel="icon" href="{{ 'favicon.ico' | relURL }}" sizes="48x48" />
+<link rel="icon" href="{{ 'icon.svg' | relURL }}" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="{{ 'apple-touch-icon.png' | relURL }}" />
