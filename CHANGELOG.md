@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 2.0.2
+
+### Patch Changes
+
+- [#59](https://github.com/thuliteio/core/pull/59) [`3657cd0`](https://github.com/thuliteio/core/commit/3657cd0adb57a10418b6b9bb1214141d87abd1cf) Thanks [@h-enk](https://github.com/h-enk)! - chore: update .prettierignore and format various HTML and SCSS files for consistency
+
 ## 2.0.1
 
 ### Patch Changes
