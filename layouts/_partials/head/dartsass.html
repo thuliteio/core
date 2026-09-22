@@ -1,24 +1,16 @@
-{{- /* Transpile SCSS to CSS with environment-aware options
-  * Uses Dart Sass for modern Sass language features
-  * Development: source maps enabled, expanded output for debugging
-  * Production: minified output, PostCSS processed, then fingerprinted with integrity hash
-  * IMPORTANT: PostCSS must run before fingerprint to ensure integrity hash matches final output
-  * Reference: https://gohugo.io/functions/css/sass/
-*/ -}}
-{{ with resources.Get . -}}
-  {{ $opts := dict
-    "enableSourceMap" hugo.IsDevelopment
-    "outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")
-    "transpiler" "dartsass"
-    "includePaths" (slice "node_modules")
-  -}}
-  {{ with . | css.Sass $opts -}}
-    {{ if hugo.IsDevelopment -}}
-      <link rel="stylesheet" href="{{ .RelPermalink }}">
-    {{ else -}}
-      {{ with . | postCSS (dict "config" "config/postcss.config.js") | fingerprint -}}
-        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
-      {{ end -}}
-    {{ end -}}
-  {{ end -}}
-{{ end -}}
+{{- /* Transpile SCSS to CSS with environment-aware options * Uses Dart Sass for modern Sass
+language features * Development: source maps enabled, expanded output for debugging * Production:
+minified output, PostCSS processed, then fingerprinted with integrity hash * IMPORTANT: PostCSS must
+run before fingerprint to ensure integrity hash matches final output * Reference:
+https://gohugo.io/functions/css/sass/ */ -}} {{ with resources.Get . -}} {{ $opts := dict
+"enableSourceMap" hugo.IsDevelopment "outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")
+"transpiler" "dartsass" "includePaths" (slice "node_modules") -}} {{ with . | css.Sass $opts -}} {{
+if hugo.IsDevelopment -}}
+<link rel="stylesheet" href="{{ .RelPermalink }}" />
+{{ else -}} {{ with . | postCSS (dict "config" "config/postcss.config.js") | fingerprint -}}
+<link
+  rel="stylesheet"
+  href="{{ .RelPermalink }}"
+  integrity="{{ .Data.Integrity }}"
+  crossorigin="anonymous" />
+{{ end -}} {{ end -}} {{ end -}} {{ end -}}

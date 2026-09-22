@@ -1,13 +1,5 @@
-{{ partial "footer/esbuild" (dict "src" "js/app.js" "load" "async") -}}
-
-{{/* EXAMPLE - only load script for production
-{{ if hugo.IsProduction -}}
-  {{ partial "footer/esbuild" (dict "src" "js/instantpage.js" "load" "async") -}}
-{{ end -}}
-*/}}
-
-{{/* EXAMPLE - only load script for a page type e.g. contact or gallery
-{{ if eq .Type "gallery" }}
-  {{ partial "footer/esbuild" (dict "src" "js/gallery.js" "load" "async") -}}
-{{ end }}
-*/}}
+{{ partial "footer/esbuild" (dict "src" "js/app.js" "load" "async") -}} {{/* EXAMPLE - only load
+script for production {{ if hugo.IsProduction -}} {{ partial "footer/esbuild" (dict "src"
+"js/instantpage.js" "load" "async") -}} {{ end -}} */}} {{/* EXAMPLE - only load script for a page
+type e.g. contact or gallery {{ if eq .Type "gallery" }} {{ partial "footer/esbuild" (dict "src"
+"js/gallery.js" "load" "async") -}} {{ end }} */}}

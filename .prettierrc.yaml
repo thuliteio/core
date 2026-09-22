@@ -12,28 +12,28 @@ quoteProps: as-needed
 arrowParens: always
 
 overrides:
-  - files: ['*.md', '*.mdx']
+  - files: ["*.md", "*.mdx"]
     options:
       parser: markdown
       proseWrap: preserve
       singleQuote: false
 
-  - files: ['*.scss', '*.css']
+  - files: ["*.scss", "*.css"]
     options:
       parser: scss
       singleQuote: false
 
-  - files: ['*.html', '*.hbs']
+  - files: ["*.html", "*.hbs"]
     options:
       parser: html
       htmlWhitespaceSensitivity: css
 
-  - files: ['*.json']
+  - files: ["*.json"]
     options:
       parser: json
       trailingComma: none
 
-  - files: ['*.yaml', '*.yml']
+  - files: ["*.yaml", "*.yml"]
     options:
       parser: yaml
       tabWidth: 2
