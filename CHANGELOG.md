@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 2.0.1
+
+### Patch Changes
+
+- [#58](https://github.com/thuliteio/core/pull/58) [`420946f`](https://github.com/thuliteio/core/commit/420946f1f240fbf97d58d171faf0f62d2ea6ddb0) Thanks [@h-enk](https://github.com/h-enk)! - chore: format package.json and portless.js for consistency and readability
+
 ## 2.0.0
 
 ### Major Changes
