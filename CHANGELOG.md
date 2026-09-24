@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 2.0.3
+
+### Patch Changes
+
+- [#60](https://github.com/thuliteio/core/pull/60) [`ce79a56`](https://github.com/thuliteio/core/commit/ce79a56f9c554ae7335e25ec417c4ae5cb783f35) Thanks [@h-enk](https://github.com/h-enk)! - chore: update dependencies and fix template paths in HTML files
+
 ## 2.0.2
 
 ### Patch Changes
