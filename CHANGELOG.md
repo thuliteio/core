@@ -1,5 +1,11 @@
 # @hyas/core
 
+## 2.0.4
+
+### Patch Changes
+
+- [#61](https://github.com/thuliteio/core/pull/61) [`f33ff27`](https://github.com/thuliteio/core/commit/f33ff27585725447387a0cfa03b7afc1650ed026) Thanks [@h-enk](https://github.com/h-enk)! - fix: add comment to clarify PostCSS processing in production
+
 ## 2.0.3
 
 ### Patch Changes
